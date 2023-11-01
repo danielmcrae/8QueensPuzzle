@@ -34,7 +34,6 @@ const diagonalConflict = (e) => {
     return false;    
 }
 
-
 // main loop
 const mainLoop = (loop) => {
     for(let i = loop; i < n; i++ ) {
@@ -65,7 +64,6 @@ const loopAgain = () => {
     }
     mainLoop(n-1);
 }
-
 
 mainLoop(0);
 
