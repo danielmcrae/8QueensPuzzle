@@ -10,7 +10,7 @@ for(let i = 0; i < n; i++) {
 }
 
 
-//Checks for chalanging queens
+//Checks for challenges queens
 const sameRowConflict = (e) => {
     for(let i = e-1; i >= 0; i--) {
         if (workingSolution[i] == workingSolution[e] ) {
@@ -20,7 +20,7 @@ const sameRowConflict = (e) => {
     return false;
 }
 
-//Checks for queens chalanging at a diagnal
+//Checks for queens challenges at a diagonal
 const diagonalConflict = (e) => {
     for(let i=e-1, j=1; i >= 0; i--, j++) {
         if(e == i) {
@@ -51,8 +51,8 @@ const mainLoop = (loop) => {
             i = i-2;
         }
     }
-    answer.push(workingSolution);
-    console.log("main loop ended" + answer);
+    // answer.push(workingSolution);
+    console.log("main loop ended " + answer); //?
 }
 
 const loopAgain = () => {
@@ -66,6 +66,9 @@ const loopAgain = () => {
 }
 
 mainLoop(0);
+answer.push(workingSolution);
+console.log(answer);
 
 loopAgain();
+answer.push(workingSolution);
 console.log("Answer" + answer);
