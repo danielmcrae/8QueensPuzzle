@@ -52,15 +52,14 @@ const mainLoop = (loop) => {
         }
     }
     // answer.push(workingSolution);
-    console.log("main loop ended " + answer); //?
+    console.log("main loop ended ", workingSolution); //?
 }
 
 const loopAgain = () => {
-    console.log("Running Loop Again");
     if (workingSolution[n-1] < n) {
         workingSolution[n-1] = workingSolution[n-1] + 1;
         
-        console.log("Reset:" + workingSolution);
+        console.log("Reset:", workingSolution);
     }
     mainLoop(n-1);
 }
@@ -69,6 +68,15 @@ mainLoop(0);
 answer.push(workingSolution);
 console.log(answer);
 
+
+let display = document.getElementById('answer');
+display.innerHTML = answer;
+
 loopAgain();
-answer.push(workingSolution);
-console.log("Answer" + answer);
+//answer.push(workingSolution);
+console.log(workingSolution);
+
+
+
+display.innerHTML = answer;
+console.log("Answer ", answer);
