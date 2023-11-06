@@ -1,19 +1,24 @@
 
-let answer = []; //final answer, 2D array
-const n = 4;
+const answer = [];; //final answer, 2D array
+const n = 4; // the number of queens
+
 let workingSolution = [];
+//const display = document.getElementById('answer');
 
 
 // Initialize the starting array size based on n.        remake using new Array method
-for(let i = 0; i < n; i++) {
-    workingSolution.push(-6);
+const initializeVariable = () => {
+    let iv = [];
+    for(let i = 0; i < n; i++) {
+        iv.push(-6);
+    }
+    return iv;
 }
 
-
 //Checks for challenges queens
-const sameRowConflict = (e) => {
+const sameRowConflict = (e, ws) => {
     for(let i = e-1; i >= 0; i--) {
-        if (workingSolution[i] == workingSolution[e] ) {
+        if (ws[i] == ws[e] ) {
             return true;
         } 
     }
@@ -21,13 +26,13 @@ const sameRowConflict = (e) => {
 }
 
 //Checks for queens challenges at a diagonal
-const diagonalConflict = (e) => {
+const diagonalConflict = (e, ws) => {
     for(let i=e-1, j=1; i >= 0; i--, j++) {
         if(e == i) {
             // Skip
-        } else if (workingSolution[e] == workingSolution[i] - j) {
+        } else if (ws[e] == ws[i] - j) {
             return true;
-        } else if (workingSolution[e] == workingSolution[i] + j) {
+        } else if (ws[e] == ws[i] + j) {
             return true;
         } 
     }
@@ -35,48 +40,70 @@ const diagonalConflict = (e) => {
 }
 
 // main loop
-const mainLoop = (loop) => {
+const mainLoop = (loop, ws) => {
     for(let i = loop; i < n; i++ ) {
-        if(workingSolution[i] == -6) {
-            workingSolution[i] = 0;
+        if(ws[i] == -6) {
+            ws[i] = 0;
         }
     
-        if(sameRowConflict(i) || diagonalConflict(i)) {
-            workingSolution[i] = workingSolution[i] + 1;
+        if(sameRowConflict(i, ws) || diagonalConflict(i, ws)) {
+            ws[i] = ws[i] + 1;
             i = i-1;
         }
-        if (workingSolution[i] >= n) {
-            workingSolution[i] = -6;
-            workingSolution[i-1] = workingSolution[i-1] + 1;
+        if (ws[i] >= n) {
+            ws[i] = -6;
+            ws[i-1] = ws[i-1] + 1;
             i = i-2;
         }
     }
-    // answer.push(workingSolution);
-    console.log("main loop ended ", workingSolution); //?
+    
+        console.log("main loop ended ", ws);
+    return ws;
 }
 
-const loopAgain = () => {
-    if (workingSolution[n-1] < n) {
-        workingSolution[n-1] = workingSolution[n-1] + 1;
+const loopAgain = (ws) => {
+    if (ws[n-1] < n) {
+        ws[n-1] = ws[n-1] + 1;
         
-        console.log("Reset:", workingSolution);
+            console.log("Reset:", ws);
     }
-    mainLoop(n-1);
+    return ws;
 }
 
-mainLoop(0);
-answer.push(workingSolution);
-console.log(answer);
+const loopDLoop = (ws) => {
+    if (areWeDoneYet) {}
+}
+
+const areWeDoneYet = (currentIteration) => {
+    for (let i = 0; i < n-1; i++){
+        if (currentIteration[i] < n) {
+            return false;
+        }
+    return true;
+    }
+}
+
+//   **THE START**
+workingSolution = initializeVariable();
+    console.log(workingSolution);
+
+answer.push(mainLoop(0, workingSolution));
+workingSolution = answer[answer.length-1];
+
+    console.log(answer);
+    console.log(workingSolution);
+//display.innerHTML = answer;
+
+let workingSolution2 = loopAgain(workingSolution);
+    console.log(workingSolution2);
+
+    console.log(workingSolution);
+    console.log(answer);
 
 
-let display = document.getElementById('answer');
-display.innerHTML = answer;
-
-loopAgain();
-//answer.push(workingSolution);
-console.log(workingSolution);
+answer.push(mainLoop(n-1, workingSolution2));
+    console.log(answer);
 
 
-
-display.innerHTML = answer;
-console.log("Answer ", answer);
+//display.innerHTML = answer;
+    console.log("Answer ", answer);
